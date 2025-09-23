@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Job</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .job-form-container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 32px 24px;
+    }
+    .job-form-container h2 {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .job-form-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .job-form-container input,
+    .job-form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .job-form-container button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .job-form-container button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="job-form-container">
+    <h2>Apply for a Job</h2>
+    <form id="jobApplicationForm">
+      <div id="jobInfoFields"></div>
+      <label for="name">Name*</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email*</label>
+      <input type="email" id="email" name="email" required>
+      <label for="resume">Resume (paste text or link)*</label>
+      <textarea id="resume" name="resume" rows="4" required></textarea>
+      <label for="coverLetter">Cover Letter</label>
+      <textarea id="coverLetter" name="coverLetter" rows="4"></textarea>
+      <button type="submit">Submit Application</button>
+    </form>
+    <div id="jobFormMsg" style="margin-top:16px;text-align:center;"></div>
+  </div>
+  <script>
+    // Pre-fill company and role if present in URL
+    function getQueryParams() {
+      const params = {};
+      window.location.search.replace(/\??([^=&]+)=([^&]*)/g, function(_, k, v) {
+        params[decodeURIComponent(k)] = decodeURIComponent(v);
+      });
+      return params;
+    }
+    const params = getQueryParams();
+    if (params.company || params.role) {
+      const jobInfoFields = document.getElementById('jobInfoFields');
+      if (params.company) {
+        jobInfoFields.innerHTML += `<label>Company</label><input type="text" name="company" value="${params.company}" readonly>`;
+      }
+      if (params.role) {
+        jobInfoFields.innerHTML += `<label>Job Role</label><input type="text" name="role" value="${params.role}" readonly>`;
+      }
+    }
+    document.getElementById('jobApplicationForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        resume: form.resume.value,
+        coverLetter: form.coverLetter.value
+      };
+      if (params.company) data.company = params.company;
+      if (params.role) data.role = params.role;
+      const msgDiv = document.getElementById('jobFormMsg');
+      msgDiv.textContent = '';
+      try {
+        const res = await fetch('/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        if (res.ok) {
+          msgDiv.style.color = 'green';
+          msgDiv.textContent = result.message;
+          form.reset();
+        } else {
+          msgDiv.style.color = 'red';
+          msgDiv.textContent = result.message || 'Submission failed.';
+        }
+      } catch (err) {
+        msgDiv.style.color = 'red';
+        msgDiv.textContent = 'Error submitting application.';
+      }
+    });
+  </script>
+</body>
+</html>

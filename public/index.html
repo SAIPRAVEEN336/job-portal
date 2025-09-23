@@ -1,0 +1,181 @@
+    <!-- Career Tips Section -->
+    <section class="career-tips-section fade-in">
+        <div class="container">
+            <h2 class="section-title">Career Tips</h2>
+            <div class="career-tips-grid">
+                <div class="career-tip-card">
+                    <div class="tip-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Optimize Your Resume</h3>
+                    <p>Highlight your achievements and tailor your resume for each job application to stand out.</p>
+                </div>
+                <div class="career-tip-card">
+                    <div class="tip-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Prepare for Interviews</h3>
+                    <p>Practice common interview questions and research the company to make a great impression.</p>
+                </div>
+                <div class="career-tip-card">
+                    <div class="tip-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Network Effectively</h3>
+                    <p>Connect with professionals in your field to discover new opportunities and gain insights.</p>
+                </div>
+                <div class="career-tip-card">
+                    <div class="tip-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h3>Keep Learning</h3>
+                    <p>Stay updated with the latest skills and trends in your industry to boost your career growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobConnect - Find Your Dream Job</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i> JobConnect
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="companies.html">Companies</a></li>
+                    <li><a href="#">Career Tips</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html" class="btn">Sign Up</a></li>
+                </ul>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero modern-hero">
+        <div class="hero-glass fade-in">
+            <h1 class="hero-title">Find Your Dream Job Today</h1>
+            <p class="hero-subtitle">Search thousands of jobs from top companies and find the perfect match for your skills and experience.</p>
+            <div class="hero-cta">
+                <a href="#jobListings" class="btn btn-success pulse">Browse Jobs</a>
+                <a href="job.html" class="btn btn-secondary">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features modern-features">
+        <div class="container">
+            <h2 class="section-title">Why Choose JobConnect?</h2>
+            <div class="features-grid">
+                <div class="feature-card modern-feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <h3>Easy Job Search</h3>
+                    <p>Filter jobs by category, location, and salary to find exactly what you're looking for.</p>
+                </div>
+                <div class="feature-card modern-feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-building"></i></div>
+                    <h3>Top Companies</h3>
+                    <p>Connect with leading employers and fast-growing startups.</p>
+                    <a href="companies.html" class="btn btn-secondary" style="margin-top:10px;">Explore Companies</a>
+                </div>
+                <div class="feature-card modern-feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-file-signature"></i></div>
+                    <h3>Apply for a Job</h3>
+                    <p>Ready to take the next step? Click here to submit your job application!</p>
+                    <a href="job.html" class="btn btn-success" style="margin-top:10px;">Go to Application</a>
+                </div>
+                <div class="feature-card modern-feature-card fade-in">
+                    <div class="feature-icon"><i class="fas fa-paper-plane"></i></div>
+                    <h3>Apply Quickly</h3>
+                    <p>Save your resume and apply to jobs with just one click. No more lengthy forms!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Easy Job Search Section -->
+    <section class="easy-job-search fade-in">
+        <div class="container">
+            <h2 class="section-title">Easy Job Search</h2>
+            <p class="section-subtitle">Filter jobs by category, location, and salary to find exactly what you're looking for.</p>
+        </div>
+    </section>
+
+    <!-- Job Listings -->
+    <section class="job-listings" id="jobListings">
+        <div class="container">
+            <h2 class="section-title">Featured Job Opportunities</h2>
+            <div class="jobs-grid" id="jobsContainer">
+                <!-- Job cards will be generated dynamically by script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form (hidden initially) -->
+    <div id="applicationForm" class="hidden">
+        <div class="form-container">
+            <button id="closeFormBtn" class="close-btn">&times;</button>
+            <h2>Apply for <span id="applyJobTitle"></span></h2>
+            <form>
+                <input type="hidden" id="jobId" name="jobId">
+                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                <input type="text" id="phone" name="phone" placeholder="Phone Number" required>
+                <textarea id="coverLetter" name="coverLetter" placeholder="Cover Letter"></textarea>
+                <label for="resume">Upload Resume:</label>
+                <input type="file" id="resume" name="resume">
+                <span id="resumeName">No file chosen</span>
+                <button type="button" id="applicationSubmitBtn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JobConnect</h3>
+                    <p>Connecting talent with opportunity. Find your dream job or the perfect candidate.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Browse Companies</a></li>
+                        <li><a href="#">Upload Resume</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> contact@jobconnect.com</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="current-year"></span> JobConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Access Your Account</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 900px;
+            width: 100%;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .left-panel h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .left-panel p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .left-panel ul {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        
+        .left-panel li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .left-panel i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .right-panel {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .right-panel h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .divider {
+            text-align: center;
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        .divider span {
+            background: #fff;
+            position: relative;
+            padding: 0 15px;
+            color: #777;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        .input-with-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-with-icon input:focus {
+            border-color: #6e8efb;
+            box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.2);
+            outline: none;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember input {
+            margin-right: 8px;
+        }
+        
+        .remember label {
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .forgot-password {
+            font-size: 14px;
+            color: #6e8efb;
+            text-decoration: none;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #555;
+        }
+        
+        .signup-link a {
+            color: #6e8efb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .left-panel {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h2>Welcome Back!</h2>
+            <p>Log in to access your personalized dashboard and continue your journey with us.</p>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Access your personal dashboard</li>
+                <li><i class="fas fa-check-circle"></i> View your saved preferences</li>
+                <li><i class="fas fa-check-circle"></i> Continue where you left off</li>
+                <li><i class="fas fa-check-circle"></i> Get personalized recommendations</li>
+            </ul>
+            <p>Don't have an account? <a href="#" style="color: white; text-decoration: underline;">Sign Up</a></p>
+        </div>
+        
+        <div class="right-panel">
+            <h2>Login to Your Account</h2>
+            
+            <div class="social-login">
+                <div class="social-btn">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+            </div>
+            
+            <div class="divider">
+                <span>Or use your email</span>
+            </div>
+            
+            <form>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn-login">Log In</button>
+            </form>
+            
+            <div class="signup-link">
+                Don't have an account? <a href="#">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Simulate successful login
+                if(email && password) {
+                    alert('Login successful! Welcome back.');
+                    form.reset();
+                }
+            });
+            
+            // Add focus effects to inputs
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

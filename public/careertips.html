@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Tips - JobConnect</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(120deg, #f5f7fa 60%, #e0e7ef 100%);
+      min-height: 100vh;
+    }
+    .tips-container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(37,99,235,0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .tips-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .tips-header h1 {
+      color: #2563eb;
+      font-size: 2.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .tips-header p {
+      color: #374151;
+      font-size: 1.1rem;
+    }
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .tip-card {
+      background: #f9fafb;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(37,99,235,0.06);
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .tip-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(37,99,235,0.13);
+    }
+    .tip-icon {
+      font-size: 2rem;
+      color: #f59e0b;
+      background: #fff7e6;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.08);
+    }
+    .tip-card h3 {
+      color: #1e40af;
+      margin-bottom: 0.6rem;
+      font-size: 1.1rem;
+    }
+    .tip-card p {
+      color: #374151;
+      font-size: 0.98rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="tips-container">
+    <div class="tips-header">
+      <h1>Career Tips</h1>
+      <p>Boost your career with expert advice on resumes, interviews, networking, and more.</p>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon"><i class="fas fa-lightbulb"></i></div>
+        <h3>Optimize Your Resume</h3>
+        <p>Highlight your achievements and tailor your resume for each job application to stand out.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon"><i class="fas fa-comments"></i></div>
+        <h3>Prepare for Interviews</h3>
+        <p>Practice common interview questions and research the company to make a great impression.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon"><i class="fas fa-network-wired"></i></div>
+        <h3>Network Effectively</h3>
+        <p>Connect with professionals in your field to discover new opportunities and gain insights.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <h3>Keep Learning</h3>
+        <p>Stay updated with the latest skills and trends in your industry to boost your career growth.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
