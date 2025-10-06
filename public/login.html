@@ -248,7 +248,7 @@
                 <li><i class="fas fa-check-circle"></i> Continue where you left off</li>
                 <li><i class="fas fa-check-circle"></i> Get personalized recommendations</li>
             </ul>
-            <p>Don't have an account? <a href="#" style="color: white; text-decoration: underline;">Sign Up</a></p>
+            <p>Don't have an account? <a href="signup.html" style="color: white; text-decoration: underline;">Sign Up</a></p>
         </div>
         
         <div class="right-panel">
@@ -273,23 +273,23 @@
                 <span>Or use your email</span>
             </div>
             
-            <form>
+            <form id="loginForm">
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <div class="input-with-icon">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="email" placeholder="Enter your email" required>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                 </div>
-                
+
                 <div class="remember-forgot">
                     <div class="remember">
                         <input type="checkbox" id="remember">
@@ -297,7 +297,7 @@
                     </div>
                     <a href="#" class="forgot-password">Forgot Password?</a>
                 </div>
-                
+
                 <button type="submit" class="btn-login">Log In</button>
             </form>
             
@@ -309,28 +309,52 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            
-            form.addEventListener('submit', function(e) {
+            const form = document.getElementById('loginForm');
+
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                
-                // Simulate successful login
-                if(email && password) {
-                    alert('Login successful! Welcome back.');
-                    form.reset();
+
+                const formData = new FormData(form);
+                const data = {
+                    email: formData.get('email'),
+                    password: formData.get('password')
+                };
+
+                try {
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        alert(result.message);
+                        // Store token in localStorage
+                        localStorage.setItem('token', result.token);
+                        localStorage.setItem('user', JSON.stringify(result.user));
+                        form.reset();
+                        // Redirect to dashboard or home page
+                        window.location.href = 'index.html';
+                    } else {
+                        alert(result.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
                 }
             });
-            
+
             // Add focus effects to inputs
             const inputs = document.querySelectorAll('input');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
                     this.parentElement.classList.add('focused');
                 });
-                
+
                 input.addEventListener('blur', function() {
                     this.parentElement.classList.remove('focused');
                 });

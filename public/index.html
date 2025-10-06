@@ -49,13 +49,15 @@
                 <div class="logo">
                     <i class="fas fa-briefcase"></i> JobConnect
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" id="navLinks">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="#">Jobs</a></li>
                     <li><a href="companies.html">Companies</a></li>
                     <li><a href="#">Career Tips</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="signup.html" class="btn">Sign Up</a></li>
+                    <li id="loginLink"><a href="login.html">Login</a></li>
+                    <li id="signupLink"><a href="signup.html" class="btn">Sign Up</a></li>
+                    <li id="workbenchLink" style="display:none;"><a href="workbench.html">My Workbench</a></li>
+                    <li id="logoutLink" style="display:none;"><a href="#" id="logout">Logout</a></li>
                 </ul>
                 <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
             </nav>
@@ -177,5 +179,24 @@
 
     <!-- JS -->
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                // User is logged in
+                document.getElementById('loginLink').style.display = 'none';
+                document.getElementById('signupLink').style.display = 'none';
+                document.getElementById('workbenchLink').style.display = 'block';
+                document.getElementById('logoutLink').style.display = 'block';
+            }
+            // Logout functionality
+            document.getElementById('logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                location.reload();
+            });
+        });
+    </script>
 </body>
 </html>

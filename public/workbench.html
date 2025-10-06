@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Workbench | JobConnect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .workbench-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .profile-section {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        .profile-section h2 {
+            margin-bottom: 16px;
+            color: #333;
+        }
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .info-item {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .info-item strong {
+            display: block;
+            color: #555;
+        }
+        .applications-section {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 24px;
+        }
+        .applications-section h2 {
+            margin-bottom: 16px;
+            color: #333;
+        }
+        .application-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .application-card h3 {
+            margin: 0 0 8px 0;
+            color: #007bff;
+        }
+        .application-card p {
+            margin: 4px 0;
+            color: #666;
+        }
+        .no-applications {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-briefcase"></i> JobConnect
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="companies.html">Companies</a></li>
+                    <li><a href="workbench.html">My Workbench</a></li>
+                    <li><a href="#" id="logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="workbench-container">
+        <div class="profile-section">
+            <h2>My Profile</h2>
+            <div id="profileInfo" class="profile-info">
+                <!-- Profile info will be loaded here -->
+            </div>
+        </div>
+
+        <div class="applications-section">
+            <h2>My Job Applications</h2>
+            <div id="applicationsList">
+                <!-- Applications will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Load profile
+            try {
+                const profileRes = await fetch('/user/profile', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (profileRes.ok) {
+                    const profile = await profileRes.json();
+                    document.getElementById('profileInfo').innerHTML = `
+                        <div class="info-item">
+                            <strong>Full Name</strong>
+                            ${profile.fullname}
+                        </div>
+                        <div class="info-item">
+                            <strong>Email</strong>
+                            ${profile.email}
+                        </div>
+                        <div class="info-item">
+                            <strong>Member Since</strong>
+                            ${new Date(profile.created_at).toLocaleDateString()}
+                        </div>
+                    `;
+                } else {
+                    alert('Failed to load profile');
+                }
+            } catch (err) {
+                console.error('Error loading profile:', err);
+            }
+
+            // Load applications
+            try {
+                const appsRes = await fetch('/user/applications', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (appsRes.ok) {
+                    const applications = await appsRes.json();
+                    const appsList = document.getElementById('applicationsList');
+                    if (applications.length === 0) {
+                        appsList.innerHTML = '<div class="no-applications">No applications yet. <a href="job.html">Apply for a job</a></div>';
+                    } else {
+                        appsList.innerHTML = applications.map(app => `
+                            <div class="application-card">
+                                <h3>${app.role || 'Job Application'}</h3>
+                                <p><strong>Company:</strong> ${app.company || 'N/A'}</p>
+                                <p><strong>Applied on:</strong> ${new Date(app.created_at).toLocaleDateString()}</p>
+                                <p><strong>Status:</strong> Pending</p>
+                            </div>
+                        `).join('');
+                    }
+                } else {
+                    alert('Failed to load applications');
+                }
+            } catch (err) {
+                console.error('Error loading applications:', err);
+            }
+
+            // Logout
+            document.getElementById('logout').addEventListener('click', function() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
